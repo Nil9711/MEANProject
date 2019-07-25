@@ -1,9 +1,9 @@
-const mongoService = require('./Mongo.Service')
+const mongoService = require('../connection/Mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 function add(post) {
     return mongoService.connect()
-        .then(db => db.collection('NilApp').insertOne(post))
+        .then(db => db.collection('blogApp').insertOne(post))
         .then(res => {
             post._id = res.insertedId
             return post
@@ -13,7 +13,7 @@ function add(post) {
 function remove(postId) {
     const _id = new ObjectId(postId)
     return mongoService.connect()
-        .then(db => db.collection('NilApp').deleteOne({ _id }))
+        .then(db => db.collection('blogApp').deleteOne({ _id }))
 }
 
 module.exports = {
